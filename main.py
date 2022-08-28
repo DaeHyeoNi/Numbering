@@ -14,12 +14,16 @@ if __name__ == '__main__':
         os.mkdir(ONTPUT_DIRECTORY)
 
     # read all files in input directory
-    DATA_LIST = os.listdir(INPUT_DIRECTORY)
-    print(f'Total files: {len(DATA_LIST)}')
+    data_list = []
+    for file in os.listdir(INPUT_DIRECTORY):
+        if file.endswith('.txt'):
+            data_list.append(file)
+    
+    print(f'Total files: {len(data_list)}')
 
-    for i in DATA_LIST:
+    for i in data_list:
         fr = FileControl(os.path.join(INPUT_DIRECTORY, i))
-        print(f'Converting... {i} {DATA_LIST.index(i) + 1}/{len(DATA_LIST)}')
+        print(f'Converting... {i} {data_list.index(i) + 1}/{len(data_list)}')
         data = fr.read_file()
         FileControl(os.path.join(ONTPUT_DIRECTORY, i)).write_file(data)
 
